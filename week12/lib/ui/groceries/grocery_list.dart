@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import '../../data/mock_grocery_repository.dart';
 import '../../models/grocery.dart';
 import 'grocery_form.dart';
+import 'package:week12/models/grocery.dart';
+import 'package:week12/tab/grocery_tab.dart';
+import 'package:week12/tab/search_tab.dart';
 
 class GroceryList extends StatefulWidget {
   const GroceryList({super.key});
@@ -10,8 +13,10 @@ class GroceryList extends StatefulWidget {
   State<GroceryList> createState() => _GroceryListState();
 }
 
-class _GroceryListState extends State<GroceryList> {
+enum GroceryTab { GroceryTab, SearchTab }
 
+class _GroceryListState extends State<GroceryList> {
+  GroceryTab _currentTab = GroceryTab.GroceryTab;
   void onCreate() async {
     // Navigate to the form screen using the Navigator push
     Grocery? newGrocery = await Navigator.push<Grocery>(
@@ -43,8 +48,12 @@ class _GroceryListState extends State<GroceryList> {
         title: const Text('Your Groceries'),
         actions: [IconButton(onPressed: onCreate, icon: const Icon(Icons.add))],
       ),
-      body: content,
+      body: IndexedStack(
+        index: _currentTab.index,
+        children: [SearchTab(id: widget.)],
+      ),
     );
+    BottomNavigationBar
   }
 }
 
